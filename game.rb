@@ -141,7 +141,7 @@ class Bingo
   end
 
    def wrong_input
-     puts " Please type go or exit"
+     puts "Please type g or exit"
      user_turn
    end
 
