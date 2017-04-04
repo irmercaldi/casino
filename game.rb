@@ -1,4 +1,6 @@
 require "color_text"
+require "pry"
+
 class Bingo
     def initialize
       @table = [
@@ -22,7 +24,7 @@ class Bingo
     @user = ' X'.red 
     #NUMBER OF USERS/CARDS
 
-    puts "RUBY BINGO"
+    puts "LETS PLAY BINGO!!!!"
     print "How many cards would you like to buy?"
     @users_count = gets.chomp.to_i
     
@@ -33,6 +35,7 @@ class Bingo
       print "Player #{i}, what is your name? "
       @user_name << gets.chomp
       @user_score[i-1] = 0
+      
     end
 
     start_game
@@ -101,7 +104,6 @@ class Bingo
         puts " 4   #{bingo[:a4]} | #{bingo[:b4]} | #{bingo[:c4]} | #{bingo[:d4]} | #{bingo[:e4]}"
         puts "    --- --- --- --- ---"
         puts " 5   #{bingo[:a5]} | #{bingo[:b5]} | #{bingo[:c5]} | #{bingo[:d5]} | #{bingo[:e5]}"
-
         puts " Bingo Number: #{@random}"
      end
   end
@@ -120,11 +122,10 @@ class Bingo
   end
 
   def user_turn
-    puts "RUBY BINGO"
     draw_game
-    print "Please type 'go' or type 'exit' to quit: "
+    print "Please type g to Go, or 'exit' to be a quitter: "
     input = gets.chomp.downcase.to_str
-    if input.length == 2
+    if input == 'g'
       @random = rand(1..75)
       puts @random
       @bingo_cards.each do |bingo|
@@ -145,9 +146,7 @@ class Bingo
    end
 
   def check_game(next_turn)
-
     game_over = nil
-
     @bingo_cards.each_with_index do |bingo, i|
       @table.each do |column|
 
@@ -155,20 +154,19 @@ class Bingo
         if times_in_column(column, @user, bingo) == true
           draw_game
           @user_score[i] += 1
-          puts ""
-          puts " Game Over -- #{@user_name[i]} WINS!!!\n".blue
+          puts " Game Over -- #{@user_name[i]} WINS!!"
           @user_name.each_with_index do |user,z|
-            puts "#{user}  #{@user_score[z]} \n".green
+            puts "#{user}  #{@user_score[z]}"
           end
           game_over = true
         end
       end
     end
 
-   unless game_over
+    unless game_over
       user_turn
     end
- end
+  end
 end
 
 Bingo.new
