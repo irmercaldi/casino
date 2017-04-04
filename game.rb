@@ -20,12 +20,14 @@ class Bingo
       [:a1,:b2,:c3,:d4,:e5],
       [:e1,:d2,:c3,:b4,:a5]
      ]
+    #BANK ACCOUNT INFORMATION
+    @balance = 100.00
 
     @user = ' X'.red 
     #NUMBER OF USERS/CARDS
 
     puts "LETS PLAY BINGO!!!!"
-    print "How many cards would you like to buy?"
+    print "How many cards would you like to buy? 5$ per card."
     @users_count = gets.chomp.to_i
     
     #GET USER'S NAME
@@ -35,10 +37,27 @@ class Bingo
       print "Player #{i}, what is your name? "
       @user_name << gets.chomp
       @user_score[i-1] = 0
-      
+
+      if @balance > 5
+        remove_money 
+      else
+        p "You're poor, go home."
+        game_over
+      end
+      p "Your new account balance is #{@balance}"
     end
 
+    
+
     start_game
+    end
+
+    def add_money
+      @balance += 25
+    end
+
+    def remove_money
+      @balance -= 5
     end
 
     def start_game 
@@ -155,6 +174,8 @@ class Bingo
           draw_game
           @user_score[i] += 1
           puts " Game Over -- #{@user_name[i]} WINS!!"
+          add_money
+          p "Your new account balance is #{@balance}"
           @user_name.each_with_index do |user,z|
             puts "#{user}  #{@user_score[z]}"
           end
