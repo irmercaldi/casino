@@ -18,7 +18,7 @@ class Bingo
       [:a5,:b5,:c5,:d5,:e5],
       #DIAGONAL WINS
       [:a1,:b2,:c3,:d4,:e5],
-     [:e1,:d2,:c3,:b4,:a5]
+      [:e1,:d2,:c3,:b4,:a5]
      ]
 
     @user = ' X'.red 
